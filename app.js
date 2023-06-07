@@ -1,6 +1,7 @@
 const express = require("express");
 const https = require('https');
 const bodyParser = require('body-parser');
+
 const app = express();
 
 app.use(bodyParser.urlencoded({
@@ -26,13 +27,15 @@ app.post("/", function(req, res) {
       const weathdesc = weathData.weather[0].description
       const icon = weathData.weather[0].icon
       const imgURL = "http://openweathermap.org/img/wn/" + icon + "@2x.png"
-      res.write("<h1> The Weather is currently " + weathdesc + "</h1>")
-      res.write("<h2> The temperature in "+query+"  is " + temp + " degrees celsius </h2>");
-      res.write("<img src=" + imgURL + ">");
+      res.write("<h1 style='text-align:center;'> The Weather is currently " + weathdesc + "</h1>")
+      res.write("<h2 style='text-align:center;'> The temperature in "+query+"  is " + temp + " degrees celsius </h2>");
+      res.write("<div style='display: flex; justify-content: center;'>");
+      res.write("<img src='" + imgURL + "' >");
+      res.write("</div>");
       res.send();
-    })
-  })
-})
+    });
+  });
+});
 app.listen(process.env.PORT || 3000 , function() {
   console.log("Server is running on port 3000.");
-})
+});
